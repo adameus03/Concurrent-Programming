@@ -4,5 +4,5 @@
 
 | Name Surname (initials) | GUID                                     |
 | ----------------------- | ---------------------------------------- |
-| AB                      | `{FD9D086C-532F-4AAC-BB99-69D7798837D8}` |
-| Jan Kowalski            | `{44FBFCF5-4430-4964-878D-1867DC679E0D}` |
+| Amadeusz Sitnicki (AS)  | `{fd121ae3-bd4f-4748-afee-a02564c66a29}` |
+| Artur Surosz (AS)       | `{771f71c0-1813-4f1f-bc04-742e0b23bf25}` |
