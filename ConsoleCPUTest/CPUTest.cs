@@ -3,7 +3,7 @@ using ConsoleCPU;
 
 namespace ConsoleCPUTest
 {
-    public class Tests
+    public class CPUTest
     {
         private CPU cpu;
         [SetUp]
