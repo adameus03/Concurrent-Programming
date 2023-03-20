@@ -1,0 +1,16 @@
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\bin\Debug\net5.0\ConsoleCPU.exe
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\bin\Debug\net5.0\ConsoleCPU.deps.json
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\bin\Debug\net5.0\ConsoleCPU.runtimeconfig.json
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\bin\Debug\net5.0\ConsoleCPU.runtimeconfig.dev.json
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\bin\Debug\net5.0\ConsoleCPU.dll
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\bin\Debug\net5.0\ref\ConsoleCPU.dll
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\bin\Debug\net5.0\ConsoleCPU.pdb
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\obj\Debug\net5.0\ConsoleCPU.csproj.AssemblyReference.cache
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\obj\Debug\net5.0\ConsoleCPU.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\obj\Debug\net5.0\ConsoleCPU.AssemblyInfoInputs.cache
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\obj\Debug\net5.0\ConsoleCPU.AssemblyInfo.cs
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\obj\Debug\net5.0\ConsoleCPU.csproj.CoreCompileInputs.cache
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\obj\Debug\net5.0\ConsoleCPU.dll
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\obj\Debug\net5.0\ref\ConsoleCPU.dll
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\obj\Debug\net5.0\ConsoleCPU.pdb
+C:\Users\amade\source\repos\Concurrent-Programming\ConsoleCPU\obj\Debug\net5.0\ConsoleCPU.genruntimeconfig.cache
