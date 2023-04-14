@@ -1,0 +1,7 @@
+﻿namespace BSDLogic
+{
+    class Ball
+    {
+
+    }
+}
