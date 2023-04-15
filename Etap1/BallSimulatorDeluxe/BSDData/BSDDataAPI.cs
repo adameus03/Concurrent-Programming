@@ -2,15 +2,8 @@
 
 namespace BSDData
 {
-    public interface BSDDataAPI
+    class BSDDataAPI : BSDAbstractDataAPI
     {
-        public static void Ok()
-        {
-
-        }
-        public void Good()
-        {
-            Debug.Close();  
-        }
+        public BSDDataAPI() : base() { }    
     }
 }
