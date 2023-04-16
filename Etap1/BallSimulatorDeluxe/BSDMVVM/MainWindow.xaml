@@ -5,14 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BSDMVVM"
         mc:Ignorable="d"
-        Title="BallSimulatorDeluxe" Height="450" Width="800">
+        Title="BallSimulatorDeluxe" Height="450" Width="800" MinWidth="800" MinHeight="450">
 
     <Window.DataContext>
         <local:BSDViewModel/>
     </Window.DataContext>
-    <StackPanel Orientation="Vertical">
-        
-        <Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -39,19 +42,27 @@
                     <Label Width="30" Height="30" VerticalAlignment="Center"/>
                 </Border>
                 <Label Content="Generate" Margin="2" Padding="5" VerticalAlignment="Center"/>
-                <TextBox VerticalAlignment="Center" MinWidth="20"/>
+                <TextBox VerticalAlignment="Center" MinWidth="20" Text="20"/>
                 <Label Content="balls" VerticalAlignment="Center"/>
             </StackPanel>
             
             
             
         </Grid>
-        <Canvas x:Name="simulationCanvas" Grid.Row="2" Grid.ColumnSpan="3" Width="{Binding Path=CanvasWidth, Mode=OneWayToSource}" Height="{Binding Path=CanvasHeight, Mode=OneWayToSource}">
-            <Rectangle Canvas.Left="0" Canvas.Top="0" Width="100" Height="20" Fill="Red"/>
-            <Rectangle Canvas.Left="0" Canvas.Top="0" Width="{Binding Path=CanvasWidth, Mode=OneWay}" Height="{Binding Path=CanvasHeight, Mode=OneWay}" Fill="Blue"/>
-        </Canvas>
-        <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding ActualWidth, ElementName=Second}" />
-    </StackPanel>
+        <!--Width="{Binding Path=CanvasWidth, Mode=OneWayToSource}" Height="{Binding Path=CanvasHeight, Mode=OneWayToSource}-->
+        
+        <Border x:Name="canvasContainer" Grid.Row="1">
+            <Viewbox Stretch="Uniform">
+                <Canvas x:Name="simulationCanvas" Width="{Binding ElementName=canvasContainer, Path=ActualWidth}" Height="{Binding ElementName=canvasContainer, Path=ActualHeight}" >
+                    <Rectangle Canvas.Left="0" Canvas.Top="0" Width="100" Height="20" Fill="Red"/>
+                    <Rectangle Canvas.Left="0" Canvas.Top="0" Width="{Binding ElementName=canvasContainer, Path=ActualWidth}" Height="{Binding ElementName=canvasContainer, Path=ActualHeight}" Fill="Gray"/>
+                </Canvas>
+                <!--<Label Background="Red" Width="{Binding ElementName=canvasContainer, Path=ActualWidth}" Height="{Binding ElementName=canvasContainer, Path=ActualHeight}"></Label>-->
+            </Viewbox>
+        </Border>
+        <!--<TextBlock Text="{Binding ElementName=canvasContainer, Path=ActualWidth}" VerticalAlignment="Bottom"/>
+        <TextBlock Text="{Binding ElementName=canvasContainer, Path=ActualHeight}" VerticalAlignment="Bottom"/>-->
+    </Grid>
     
     <!--<StackPanel>
         <Grid>
