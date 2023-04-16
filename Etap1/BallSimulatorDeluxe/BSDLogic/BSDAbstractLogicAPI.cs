@@ -12,7 +12,7 @@ namespace BSDLogic
 {
     abstract class BSDAbstractLogicAPI
     {
-        protected readonly BSDData.BSDAbstractDataAPI? dataAPI;
+        protected readonly BSDData.BSDAbstractDataAPI dataAPI;
         protected ObservableCollection<Ball> balls = new ObservableCollection<Ball>();
         public BSDAbstractLogicAPI(BSDData.BSDAbstractDataAPI dataAPI)
         {
@@ -25,7 +25,7 @@ namespace BSDLogic
 
         public abstract void GenerateBalls(int ballsNumber, Color ballsColor);
 
-        public abstract void UpdateBalls();
+        public abstract void UpdateBalls(int chrononMiliseconds, int planckPixels);
 
         public ObservableCollection<Ball> Balls => this.balls;
     }

@@ -8,5 +8,9 @@ namespace BSDMVVM
 {
     class BSDViewModel
     {
+        public BSDViewModel()
+        {
+            
+        }
     }
 }

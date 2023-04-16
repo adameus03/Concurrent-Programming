@@ -7,7 +7,14 @@
         mc:Ignorable="d"
         Title="BallSimulatorDeluxe" Height="450" Width="800">
     <Grid>
-        <Canvas/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="423*"/>
+            <ColumnDefinition Width="377*"/>
+        </Grid.ColumnDefinitions>
+        <Canvas x:Name="simulationCanvas" Grid.ColumnSpan="2">
+            <Rectangle Canvas.Left="100" Canvas.Top="20" Width="50" Height="20" Fill="Red"  Stroke="DarkViolet" StrokeThickness="4"></Rectangle>
+            <Ellipse Canvas.Left="10" Canvas.Top="50" Width="20" Height="20" Fill="Green" Stroke="Aqua" StrokeThickness="2"></Ellipse>
+        </Canvas>
 
     </Grid>
 </Window>

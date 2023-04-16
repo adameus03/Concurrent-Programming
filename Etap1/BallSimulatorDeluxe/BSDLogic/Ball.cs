@@ -7,11 +7,11 @@ namespace BSDLogic
     class Ball
     {
         private Point location;
-        private double radius;
+        private int radius;
         private Color color;
         private Vector2 velocity;
        
-        public Ball(Point location, double radius, Color color, Vector2? velocity = null)
+        public Ball(Point location, int radius, Color color, Vector2? velocity = null)
         {
             this.location = location;
             this.radius = radius;
@@ -24,7 +24,7 @@ namespace BSDLogic
             get => this.location;
             set => this.location = value;
         }
-        public double Radius => this.radius;
+        public int Radius => this.radius;
         public Color Color => this.color;
         public Vector2 Velocity
         {

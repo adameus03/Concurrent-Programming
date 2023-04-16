@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace BallSimulatorDeluxe
 {
@@ -23,6 +24,11 @@ namespace BallSimulatorDeluxe
         public MainWindow()
         {
             InitializeComponent();
+            simulationCanvas.Loaded += (s, e) =>
+            {
+                MessageBox.Show($"{simulationCanvas.ActualWidth}, {simulationCanvas.ActualHeight}");
+
+            };
         }
     }
 }
