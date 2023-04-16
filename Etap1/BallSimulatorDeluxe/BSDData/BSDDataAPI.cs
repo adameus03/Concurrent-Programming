@@ -4,6 +4,12 @@ namespace BSDData
 {
     class BSDDataAPI : BSDAbstractDataAPI
     {
-        public BSDDataAPI() : base() { }    
+        BasicConstraintManager basicConstraintManager = new BasicConstraintManager();
+        public BSDDataAPI() : base() { }
+
+        public override BasicConstraintManager GetConstraintManager()
+        {
+            return basicConstraintManager;
+        }
     }
 }

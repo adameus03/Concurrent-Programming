@@ -9,13 +9,12 @@ namespace BSDData
 {
     public abstract class BSDAbstractDataAPI
     {
-        private ConstraintManager constraintManager;
         public BSDAbstractDataAPI() { }
         public static BSDAbstractDataAPI CreateInstance()
         {
             return new BSDDataAPI();
         }
 
-        public abstract void SetContraints(Rectangle locationSpan, double minimalBallRadius, double maximalBallRadius);
+        public abstract IConstraintManager GetConstraintManager();
     }
 }
