@@ -30,7 +30,7 @@ namespace BSDLogic
         public event NotifyCollectionChangedEventHandler? CollectionChanged;
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public void OnCollectionChanged(NotifyCollectionChangedAction action, object? elements)
+        private void OnCollectionChanged(NotifyCollectionChangedAction action, object? elements)
         {
             //ExecuteReceived?.Invoke(this, new EventArgs());
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action));

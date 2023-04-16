@@ -13,7 +13,7 @@ namespace BSDLogic
     public abstract class BSDAbstractLogicAPI
     {
         protected readonly BSDData.BSDAbstractDataAPI dataAPI;
-        public BallCollection balls = new BallCollection();
+        protected BallCollection balls = new BallCollection();
         public BSDAbstractLogicAPI(BSDData.BSDAbstractDataAPI dataAPI)
         {
             this.dataAPI = dataAPI;
