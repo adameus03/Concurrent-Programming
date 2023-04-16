@@ -11,14 +11,41 @@
         <local:BSDViewModel/>
     </Window.DataContext>
     <StackPanel Orientation="Vertical">
-        <Label Grid.Row="0" Grid.ColumnSpan="4" Content="BallSimulatorDeluxe" Foreground="Red" HorizontalContentAlignment="Center" FontSize="20" FontFamily="Poor Richard"/>
-        <StackPanel Orientation="Horizontal">
-            <Button Content="Start" Margin="2" Padding="5"/>
-            <Button Content="Pause" Margin="2" Padding="5"/>
-            <Label Content="Number of balls:"/>
-            <TextBox VerticalAlignment="Center" MinWidth="20"/>
-            <Button Content="Generate balls" Margin="2" Padding="5"/>
-        </StackPanel>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <Border>
+                    <Border.Background>
+                        <ImageBrush ImageSource="play.png"/>
+                    </Border.Background>
+                    <Label Width="30" Height="30" VerticalAlignment="Center"/>
+                </Border>
+
+                <Label Content="Start" Margin="2" Padding="5" VerticalAlignment="Center"/>
+            </StackPanel>
+            
+            <Label Grid.Column="1" Content="BallSimulatorDeluxe" Foreground="Red" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" FontFamily="Poor Richard"/>
+            
+            <StackPanel Grid.Column="2"  Orientation="Horizontal" HorizontalAlignment="Right">
+                <Border>
+                    <Border.Background>
+                        <ImageBrush ImageSource="play.png"/>
+                    </Border.Background>
+                    <Label Width="30" Height="30" VerticalAlignment="Center"/>
+                </Border>
+                <Label Content="Generate" Margin="2" Padding="5" VerticalAlignment="Center"/>
+                <TextBox VerticalAlignment="Center" MinWidth="20"/>
+                <Label Content="balls" VerticalAlignment="Center"/>
+            </StackPanel>
+            
+            
+            
+        </Grid>
         <Canvas x:Name="simulationCanvas" Grid.Row="2" Grid.ColumnSpan="3" Width="{Binding Path=CanvasWidth, Mode=OneWayToSource}" Height="{Binding Path=CanvasHeight, Mode=OneWayToSource}">
             <Rectangle Canvas.Left="0" Canvas.Top="0" Width="100" Height="20" Fill="Red"/>
             <Rectangle Canvas.Left="0" Canvas.Top="0" Width="{Binding Path=CanvasWidth, Mode=OneWay}" Height="{Binding Path=CanvasHeight, Mode=OneWay}" Fill="Blue"/>

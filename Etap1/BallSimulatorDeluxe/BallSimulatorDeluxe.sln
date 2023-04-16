@@ -7,9 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSDMVVM", "BSDMVVM\BSDMVVM.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestBallSimulatorDeluxe", "TestBallSimulatorDeluxe\TestBallSimulatorDeluxe.csproj", "{CE105082-7A4F-4865-9AAE-47FFA7DC2267}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSDLogic", "BSDLogic\BSDLogic.csproj", "{CF46BC28-CAE7-4647-9557-F16E0D85BD34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSDLogic", "BSDLogic\BSDLogic.csproj", "{CF46BC28-CAE7-4647-9557-F16E0D85BD34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSDData", "BSDData\BSDData.csproj", "{40BCE85D-5010-4A05-A035-1066CD10C239}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSDData", "BSDData\BSDData.csproj", "{40BCE85D-5010-4A05-A035-1066CD10C239}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{58E64B5E-3555-49FF-99DE-5C70C507AAEC}"
+	ProjectSection(SolutionItems) = preProject
+		Images\pause.png = Images\pause.png
+		Images\play.png = Images\play.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
