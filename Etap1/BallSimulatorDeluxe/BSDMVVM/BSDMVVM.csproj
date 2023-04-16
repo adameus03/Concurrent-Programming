@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BSDLogic\BSDLogic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="play.png" />
   </ItemGroup>
 

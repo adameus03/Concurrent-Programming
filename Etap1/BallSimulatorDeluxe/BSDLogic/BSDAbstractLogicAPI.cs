@@ -10,10 +10,10 @@ using System.Windows;
 
 namespace BSDLogic
 {
-    abstract class BSDAbstractLogicAPI
+    public abstract class BSDAbstractLogicAPI
     {
         protected readonly BSDData.BSDAbstractDataAPI dataAPI;
-        protected ObservableCollection<Ball> balls = new ObservableCollection<Ball>();
+        public BallCollection balls = new BallCollection();
         public BSDAbstractLogicAPI(BSDData.BSDAbstractDataAPI dataAPI)
         {
             this.dataAPI = dataAPI;
@@ -27,6 +27,6 @@ namespace BSDLogic
 
         public abstract void UpdateBalls(int chrononMiliseconds, int planckPixels);
 
-        public ObservableCollection<Ball> Balls => this.balls;
+        public BallCollection Balls => this.balls;
     }
 }

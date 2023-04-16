@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace BSDLogic
 {
-    class Ball
+    public class Ball
     {
         private Point location;
         private int radius;
