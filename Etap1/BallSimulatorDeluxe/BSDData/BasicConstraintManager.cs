@@ -10,20 +10,20 @@ namespace BSDData
     class BasicConstraintManager : IConstraintManager
     {
         private Rectangle locationSpan;
-        private double maximalBallRadius;
-        private double minimalBallRadius;
+        private int maximalBallRadius;
+        private int minimalBallRadius;
 
         public Rectangle GetLocationSpan()
         {
             return this.locationSpan;
         }
 
-        public double GetMaximalBallRadius()
+        public int GetMaximalBallRadius()
         {
             return this.maximalBallRadius;
         }
 
-        public double GetMinimalBallRadius()
+        public int GetMinimalBallRadius()
         {
             return this.minimalBallRadius;
         }
@@ -33,12 +33,12 @@ namespace BSDData
             this.locationSpan = locationSpan;
         }
 
-        public void SetMaximalBallRadius(double maximalBallRadius)
+        public void SetMaximalBallRadius(int maximalBallRadius)
         {
             this.maximalBallRadius = maximalBallRadius;
         }
 
-        public void SetMinimalBallRadius(double minimalBallRadius)
+        public void SetMinimalBallRadius(int minimalBallRadius)
         {
             this.minimalBallRadius = minimalBallRadius;
         }

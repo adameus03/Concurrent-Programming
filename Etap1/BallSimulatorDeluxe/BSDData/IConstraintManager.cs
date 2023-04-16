@@ -10,11 +10,11 @@ namespace BSDData
     public interface IConstraintManager
     {
         public Rectangle GetLocationSpan();
-        public double GetMinimalBallRadius();
-        public double GetMaximalBallRadius();
+        public int GetMinimalBallRadius();
+        public int GetMaximalBallRadius();
 
         public void SetLocationSpan(Rectangle locationSpan);
-        public void SetMinimalBallRadius(double minimalBallRadius);
-        public void SetMaximalBallRadius(double maximalBallRadius);
+        public void SetMinimalBallRadius(int minimalBallRadius);
+        public void SetMaximalBallRadius(int maximalBallRadius);
     }
 }

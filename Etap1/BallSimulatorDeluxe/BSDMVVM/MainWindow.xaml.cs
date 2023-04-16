@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 
-namespace BallSimulatorDeluxe
+namespace BSDMVVM
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,11 +24,11 @@ namespace BallSimulatorDeluxe
         public MainWindow()
         {
             InitializeComponent();
-            simulationCanvas.Loaded += (s, e) =>
+            /*simulationCanvas.Loaded += (s, e) =>
             {
                 MessageBox.Show($"{simulationCanvas.ActualWidth}, {simulationCanvas.ActualHeight}");
 
-            };
+            };*/
         }
     }
 }

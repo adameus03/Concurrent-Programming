@@ -8,9 +8,12 @@ namespace BSDMVVM
 {
     class BSDViewModel
     {
+
         public BSDViewModel()
         {
             
         }
+        public int CanvasWidth { get; set; }
+        public int CanvasHeight { get; set; }
     }
 }
