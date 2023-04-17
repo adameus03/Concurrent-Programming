@@ -34,7 +34,7 @@ namespace BSDLogic
         {
             //ExecuteReceived?.Invoke(this, new EventArgs());
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("balls"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Balls"));
         }
 
         public Ball this[int index]

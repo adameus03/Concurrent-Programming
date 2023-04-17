@@ -11,12 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSDLogic", "BSDLogic\BSDLog
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSDData", "BSDData\BSDData.csproj", "{40BCE85D-5010-4A05-A035-1066CD10C239}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{58E64B5E-3555-49FF-99DE-5C70C507AAEC}"
-	ProjectSection(SolutionItems) = preProject
-		Images\pause.png = Images\pause.png
-		Images\play.png = Images\play.png
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

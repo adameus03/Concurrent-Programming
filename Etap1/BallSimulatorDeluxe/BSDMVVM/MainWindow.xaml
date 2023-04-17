@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:BSDMVVM"
         mc:Ignorable="d"
         Title="BallSimulatorDeluxe" Height="450" Width="800" MinWidth="800" MinHeight="450">
@@ -24,9 +25,23 @@
             <StackPanel Orientation="Horizontal" Grid.Column="0">
                 <Border>
                     <Border.Background>
-                        <ImageBrush ImageSource="play.png"/>
+                        <ImageBrush ImageSource="{Binding RunControlImagePath}"/>
                     </Border.Background>
-                    <Label Width="30" Height="30" VerticalAlignment="Center"/>
+                    <Label Width="30" Height="30" VerticalAlignment="Center">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseEnter">
+                                <i:InvokeCommandAction Command="{Binding RunControlHighlight}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <i:InvokeCommandAction Command="{Binding RunControlUnhighlight}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseUp">
+                                <i:InvokeCommandAction Command="{Binding ToggleSimulation}"/>
+                            </i:EventTrigger>
+                            
+                        </i:Interaction.Triggers>
+                    </Label>
+
                 </Border>
 
                 <Label Content="Start" Margin="2" Padding="5" VerticalAlignment="Center"/>
@@ -35,14 +50,27 @@
             <Label Grid.Column="1" Content="BallSimulatorDeluxe" Foreground="Red" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" FontFamily="Poor Richard"/>
             
             <StackPanel Grid.Column="2"  Orientation="Horizontal" HorizontalAlignment="Right">
-                <Border>
+                <Border Focusable="True">
                     <Border.Background>
-                        <ImageBrush ImageSource="play.png"/>
+                        <ImageBrush ImageSource="{Binding GeneratorImagePath}"/>
                     </Border.Background>
-                    <Label Width="30" Height="30" VerticalAlignment="Center"/>
+                    <Label Width="30" Height="30" VerticalAlignment="Center" Focusable="True">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseEnter">
+                                <i:InvokeCommandAction Command="{Binding GeneratorHighlight}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <i:InvokeCommandAction Command="{Binding GeneratorUnhighlight}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseUp">
+                                <i:InvokeCommandAction Command="{Binding LaunchGenerator}"/>
+                            </i:EventTrigger>
+                            
+                        </i:Interaction.Triggers>
+                    </Label>
                 </Border>
                 <Label Content="Generate" Margin="2" Padding="5" VerticalAlignment="Center"/>
-                <TextBox VerticalAlignment="Center" MinWidth="20" Text="20"/>
+                <TextBox VerticalAlignment="Center" MinWidth="20" Text="{Binding BallsNumber}" IsEnabled="{Binding BallsNumberTextBoxEnabled}"/>
                 <Label Content="balls" VerticalAlignment="Center"/>
             </StackPanel>
             
@@ -53,11 +81,24 @@
         
         <Border x:Name="canvasContainer" Grid.Row="1">
             <Viewbox Stretch="Uniform">
-                <Canvas x:Name="simulationCanvas" Width="{Binding ElementName=canvasContainer, Path=ActualWidth}" Height="{Binding ElementName=canvasContainer, Path=ActualHeight}" >
-                    <Rectangle Canvas.Left="0" Canvas.Top="0" Width="{Binding ElementName=canvasContainer, Path=ActualWidth}" Height="{Binding ElementName=canvasContainer, Path=ActualHeight}" Fill="Gray"/>
-                    <Rectangle Canvas.Left="0" Canvas.Top="0" Width="100" Height="20" Fill="Red"/>
-                    <Ellipse x:Name="testEllipse"  Canvas.Left="100" Canvas.Top="50" Width="30" Height="40" Fill="AliceBlue"/>
-                </Canvas>
+                <ItemsControl ItemsSource="{Binding Balls}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas x:Name="simulationCanvas" Width="{Binding ElementName=canvasContainer, Path=ActualWidth}" Height="{Binding ElementName=canvasContainer, Path=ActualHeight}" >
+                                <!--<Rectangle Canvas.Left="0" Canvas.Top="0" Width="{Binding ElementName=canvasContainer, Path=ActualWidth}" Height="{Binding ElementName=canvasContainer, Path=ActualHeight}" Fill="Gray"/>
+                                <Rectangle Canvas.Left="0" Canvas.Top="0" Width="100" Height="20" Fill="Red"/>
+                                <Ellipse x:Name="testEllipse"  Canvas.Left="100" Canvas.Top="50" Width="30" Height="40" Fill="AliceBlue"/>-->
+                            </Canvas>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Ellipse Canvas.Left="{Binding Location.X}" Canvas.Top="{Binding Location.Y}"  Width="{Binding Radius}" Height="{Binding Radius}" Fill="{Binding Color}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
                 <!--<Label Background="Red" Width="{Binding ElementName=canvasContainer, Path=ActualWidth}" Height="{Binding ElementName=canvasContainer, Path=ActualHeight}"></Label>-->
             </Viewbox>
         </Border>
