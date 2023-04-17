@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\generate.png" />
+    <None Remove="Images\generate_active.png" />
+    <None Remove="Images\pause.png" />
+    <None Remove="Images\pause_active.png" />
+    <None Remove="Images\play.png" />
+    <None Remove="Images\play_active.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BSDLogic\BSDLogic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\generate.png" />
+    <Resource Include="Images\generate_active.png" />
+    <Resource Include="Images\pause.png" />
+    <Resource Include="Images\pause_active.png" />
+    <Resource Include="Images\play.png" />
+    <Resource Include="Images\play_active.png" />
+  </ItemGroup>
+
+</Project>
