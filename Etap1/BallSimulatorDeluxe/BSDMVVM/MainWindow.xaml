@@ -50,7 +50,7 @@
             <Label Grid.Column="1" Content="BallSimulatorDeluxe" Foreground="Red" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" FontFamily="Poor Richard"/>
             
             <StackPanel Grid.Column="2"  Orientation="Horizontal" HorizontalAlignment="Right">
-                <Border Focusable="True">
+                <!--<Border Focusable="True">
                     <Border.Background>
                         <ImageBrush ImageSource="{Binding GeneratorImagePath}"/>
                     </Border.Background>
@@ -68,10 +68,11 @@
                             
                         </i:Interaction.Triggers>
                     </Label>
-                </Border>
+                </Border>-->
                 <Label Content="Generate" Margin="2" Padding="5" VerticalAlignment="Center"/>
-                <TextBox VerticalAlignment="Center" MinWidth="20" Text="{Binding BallsNumber}" IsEnabled="{Binding BallsNumberTextBoxEnabled}"/>
+                <TextBox VerticalAlignment="Center" MinWidth="20" Text="{Binding Path=BallsNumber, Mode=TwoWay}" IsEnabled="{Binding BallsNumberTextBoxEnabled}"/>
                 <Label Content="balls" VerticalAlignment="Center"/>
+                <Button VerticalAlignment="Center" Margin="2" Padding="5" Command="{Binding LaunchGenerator}">Submit</Button>
             </StackPanel>
             
             

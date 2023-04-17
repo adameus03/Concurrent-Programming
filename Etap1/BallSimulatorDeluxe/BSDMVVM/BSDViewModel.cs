@@ -113,6 +113,7 @@ namespace BSDMVVM
             //MessageBox.Show("Gener balls");
             this.ballsNumberTextBoxEnabled = false;
             OnPropertyChanged(nameof(this.ballsNumberTextBoxEnabled));
+            
             //OnPropertyChanged(nameof(this.BallsNumber));
             //generate balls
             this.model.EllipsesInitialization();
@@ -186,7 +187,13 @@ namespace BSDMVVM
         public string RunControlImagePath { get; set; } 
         public string GeneratorImagePath { get; set; }
 
-        public int BallsNumber { get; set; } = 20;
+        public int BallsNumber {
+            get => this.model.NumberOfBalls;
+            set
+            {
+                this.model.NumberOfBalls = value;
+            }
+        }
 
         public bool BallsNumberTextBoxEnabled => this.ballsNumberTextBoxEnabled;
 
