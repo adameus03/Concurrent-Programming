@@ -12,9 +12,11 @@ namespace BSDData
         public Rectangle GetLocationSpan();
         public int GetMinimalBallRadius();
         public int GetMaximalBallRadius();
+        public double GetBallVelocityMagnitude();
 
         public void SetLocationSpan(Rectangle locationSpan);
         public void SetMinimalBallRadius(int minimalBallRadius);
         public void SetMaximalBallRadius(int maximalBallRadius);
+        public void SetBallVelocityMagnitude(double ballVelocityMagnitude);
     }
 }

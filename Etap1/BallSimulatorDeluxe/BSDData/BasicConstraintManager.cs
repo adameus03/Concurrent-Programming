@@ -12,6 +12,7 @@ namespace BSDData
         private Rectangle locationSpan;
         private int maximalBallRadius;
         private int minimalBallRadius;
+        private double ballVelocityMagnitude;
 
         public Rectangle GetLocationSpan()
         {
@@ -27,6 +28,10 @@ namespace BSDData
         {
             return this.minimalBallRadius;
         }
+        public double GetBallVelocityMagnitude()
+        {
+            return this.ballVelocityMagnitude;
+        }
 
         public void SetLocationSpan(Rectangle locationSpan)
         {
@@ -41,6 +46,10 @@ namespace BSDData
         public void SetMinimalBallRadius(int minimalBallRadius)
         {
             this.minimalBallRadius = minimalBallRadius;
+        }
+        public void SetBallVelocityMagnitude(double ballVelocityMagnitude)
+        {
+            this.ballVelocityMagnitude = ballVelocityMagnitude;
         }
     }
 }

@@ -6,12 +6,12 @@ namespace BSDLogic
 {
     public class Ball
     {
-        private Point location;
+        private (double, double) location;
         private int radius;
-        private Color color;
+        private string color;
         private Vector2 velocity;
        
-        public Ball(Point location, int radius, Color color, Vector2? velocity = null)
+        public Ball((double, double) location, int radius, string color, Vector2? velocity = null)
         {
             this.location = location;
             this.radius = radius;
@@ -19,18 +19,21 @@ namespace BSDLogic
             this.velocity = velocity ?? new Vector2(0);
         }
         
-        public Point Location
+        public (double,double) Location
         {
             get => this.location;
             set => this.location = value;
         }
         public int Radius => this.radius;
-        public Color Color => this.color;
+        public string Color => this.color;
         public Vector2 Velocity
         {
             get => this.velocity;
             set => this.velocity = value;
         }
+
+        public int IntegerX => (int)this.Location.Item1;
+        public int IntegerY => (int)this.Location.Item2;
 
     }
 }

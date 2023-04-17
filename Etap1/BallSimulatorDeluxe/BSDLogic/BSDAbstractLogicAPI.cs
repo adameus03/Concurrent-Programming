@@ -23,10 +23,12 @@ namespace BSDLogic
         }
 
 
-        public abstract void GenerateBalls(int ballsNumber, Color ballsColor);
+        public abstract void GenerateBalls(int ballsNumber, string ballsColor);
 
         public abstract void UpdateBalls(int chrononMiliseconds, int planckPixels);
+        public abstract void SetConstraint(string constraintName, object constraintValue);
 
         public BallCollection Balls => this.balls;
+
     }
 }

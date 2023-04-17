@@ -6,7 +6,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:BSDMVVM"
         mc:Ignorable="d"
-        Title="BallSimulatorDeluxe" Height="450" Width="800" MinWidth="800" MinHeight="450">
+        Title="BallSimulatorDeluxe" Height="{Binding Path=WindowHeight, Mode=TwoWay}" Width="{Binding Path=WindowWidth, Mode=TwoWay}" MinWidth="800" MinHeight="450">
 
     <Window.DataContext>
         <local:BSDViewModel/>
@@ -78,27 +78,36 @@
             
         </Grid>
         <!--Width="{Binding Path=CanvasWidth, Mode=OneWayToSource}" Height="{Binding Path=CanvasHeight, Mode=OneWayToSource}-->
-        
+
         <Border x:Name="canvasContainer" Grid.Row="1">
             <Viewbox Stretch="Uniform">
                 <ItemsControl ItemsSource="{Binding Balls}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <Canvas x:Name="simulationCanvas" Width="{Binding ElementName=canvasContainer, Path=ActualWidth}" Height="{Binding ElementName=canvasContainer, Path=ActualHeight}" >
-                                <!--<Rectangle Canvas.Left="0" Canvas.Top="0" Width="{Binding ElementName=canvasContainer, Path=ActualWidth}" Height="{Binding ElementName=canvasContainer, Path=ActualHeight}" Fill="Gray"/>
-                                <Rectangle Canvas.Left="0" Canvas.Top="0" Width="100" Height="20" Fill="Red"/>
-                                <Ellipse x:Name="testEllipse"  Canvas.Left="100" Canvas.Top="50" Width="30" Height="40" Fill="AliceBlue"/>-->
+                                
                             </Canvas>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ContentPresenter">
+                            <Setter Property="Canvas.Left" Value="{Binding IntegerX}"/>
+                            <Setter Property="Canvas.Top" Value="{Binding IntegerY}"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Ellipse Canvas.Left="{Binding Location.X}" Canvas.Top="{Binding Location.Y}"  Width="{Binding Radius}" Height="{Binding Radius}" Fill="{Binding Color}"/>
+                            <!--<Ellipse Width="100" Height="100" Fill="Green"/>-->
+                            <Ellipse Width="{Binding Radius}" Height="{Binding Radius}" Fill="{Binding Color}"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                
+                <!--<Canvas x:Name="simulationCanvas" Width="{Binding ElementName=canvasContainer, Path=ActualWidth}" Height="{Binding ElementName=canvasContainer, Path=ActualHeight}" >
+                    <Rectangle Canvas.Left="0" Canvas.Top="0" Width="{Binding ElementName=canvasContainer, Path=ActualWidth}" Height="{Binding ElementName=canvasContainer, Path=ActualHeight}" Fill="Gray"/>
+                                <Rectangle Canvas.Left="0" Canvas.Top="0" Width="100" Height="20" Fill="Red"/>
+                    <Ellipse x:Name="testEllipse"  Canvas.Left="100" Canvas.Top="50" Width="30" Height="40" Fill="AliceBlue"/>
+                </Canvas>-->
+
                 <!--<Label Background="Red" Width="{Binding ElementName=canvasContainer, Path=ActualWidth}" Height="{Binding ElementName=canvasContainer, Path=ActualHeight}"></Label>-->
             </Viewbox>
         </Border>

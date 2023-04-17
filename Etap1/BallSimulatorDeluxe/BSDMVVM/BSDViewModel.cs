@@ -9,10 +9,12 @@ using System.Collections.Specialized;
 using BSDLogic;
 using System.Windows;
 using System.Runtime.CompilerServices;
+using BSDData;
+using System.Text.RegularExpressions;
 
 namespace BSDMVVM
 {
-    class BSDViewModel : INotifyPropertyChanged, INotifyCollectionChanged
+    class BSDViewModel : INotifyPropertyChanged
     {
         private readonly BSDModel model;
         private Command runControlHighlight = new Command();
@@ -32,7 +34,6 @@ namespace BSDMVVM
         private bool animationPaused = true;
         private bool ballsNumberTextBoxEnabled = true;
 
-        private Task animation;
 
 
         public BSDViewModel()
@@ -40,9 +41,16 @@ namespace BSDMVVM
             this.model = new BSDModel();
             this.model.Balls.CollectionChanged += (s, e) =>
             {
-                OnCollectionChanged(e.Action, e.NewItems); // multip or single?
+                //MessageBox.Show("Balls.CollectionChanged event detected in ViewModel");
                 OnPropertyChanged(nameof(this.Balls));
             };
+            this.model.SetBoundingRectangle(new System.Drawing.Rectangle(0, 0, this.WindowWidth, this.WindowHeight-30));
+            //this.model.SetBoundingRectangle(new System.Drawing.Rectangle(0, 0, 200, 200));
+
+            this.model.SetMinimalBallRadius(10);
+            this.model.SetMaximalBallRadius(20);
+            this.model.SetBallsSpeed(100.0);
+            
             this.RunControlImagePath = BSDViewModel.playPath;
             this.GeneratorImagePath = BSDViewModel.generatorPath;
             this.runControlHighlight.ExecuteReceived += RunControlHighlight_ExecuteReceived;
@@ -52,18 +60,51 @@ namespace BSDMVVM
             this.toggleSimulation.ExecuteReceived += ToggleSimulation_ExecuteReceived;
             this.launchGenerator.ExecuteReceived += LaunchGenerator_ExecuteReceived;
 
-            this.animation = new Task(() =>
+            this.Balls.PropertyChanged += Balls_PropertyChanged;
+            //this.Balls.CollectionChanged += Balls_CollectionChanged;
+
+            /*(async () =>
             {
                 while (true)
                 {
-                    Task.Delay(1000 / this.model.SimulationFPS);
+                    await Task.Delay(1000 / this.model.SimulationFPS);
                     if (!this.animationPaused)
                     {
-                        this.model.EllipsesRepositioning();
+                        //MessageBox.Show("ok");
+                        App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                        {
+                            this.model.EllipsesRepositioning();
+                        });
+                        
                     }
                 }
-            });
-            this.animation.Start();
+            })();*/
+            this.Animate();
+        }
+
+        /*private void Balls_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            MessageBox.Show("BCollChanged");
+            //OnCollectionChanged(e.Action, e.NewItems);
+        }*/
+
+        private async void Animate()
+        {
+            while (true)
+            {
+                await Task.Delay(1000 / this.model.SimulationFPS);
+                if (!this.animationPaused)
+                {
+                    this.model.EllipsesRepositioning();
+
+                }
+            }
+        }
+
+        private void Balls_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            //MessageBox.Show("BPropChanged");
+            OnPropertyChanged(nameof(this.Balls));
         }
 
         private void LaunchGenerator_ExecuteReceived(object? sender, EventArgs e)
@@ -83,14 +124,12 @@ namespace BSDMVVM
         private void ToggleSimulation_ExecuteReceived(object? sender, EventArgs e)
         {
             //MessageBox.Show("Toggle simul");
+            // start/pause simulation
             this.animationPaused = !this.animationPaused;
             this.RunControlImagePath = this.animationPaused ? BSDViewModel.playActivePath : BSDViewModel.pauseActivePath;
             OnPropertyChanged(nameof(this.RunControlImagePath));
-            // start/stop simulation
-            if (!this.animationPaused)
-            {
-
-            }
+            
+            
             
         }
 
@@ -122,7 +161,6 @@ namespace BSDMVVM
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
@@ -130,13 +168,9 @@ namespace BSDMVVM
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void OnCollectionChanged(NotifyCollectionChangedAction action, object? elements)
-        {
-            this.CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, elements));
-        }
 
-        public int CanvasWidth { get; set; }
-        public int CanvasHeight { get; set; }
+        public double CanvasWidth { get; set; }
+        public double CanvasHeight { get; set; }
 
         public BallCollection Balls => this.model.Balls;
 
@@ -155,6 +189,9 @@ namespace BSDMVVM
         public int BallsNumber { get; set; } = 20;
 
         public bool BallsNumberTextBoxEnabled => this.ballsNumberTextBoxEnabled;
+
+        public int WindowWidth { get; set; } = 800;
+        public int WindowHeight { get; set; } = 450;
 
     }
 }
