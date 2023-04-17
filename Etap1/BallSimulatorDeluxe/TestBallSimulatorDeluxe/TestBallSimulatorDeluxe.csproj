@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BSDData\BSDData.csproj" />
     <ProjectReference Include="..\BSDLogic\BSDLogic.csproj" />
   </ItemGroup>
 
