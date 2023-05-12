@@ -19,7 +19,7 @@ namespace BSDLogic
         public void Put(List<Ball> balls)
         {
             this.balls = balls;
-            OnCollectionChanged(NotifyCollectionChangedAction.Reset);
+            //OnCollectionChanged(NotifyCollectionChangedAction.Reset); COMMENTED OUT FOR PERFORMANCE
         }
 
         public event NotifyCollectionChangedEventHandler? CollectionChanged;
@@ -38,12 +38,12 @@ namespace BSDLogic
             set { 
                 this.balls.Insert(index, value);
                 //OnCollectionChanged(NotifyCollectionChangedAction.Replace, this[index]);
-                OnCollectionChanged(NotifyCollectionChangedAction.Reset);
+                //OnCollectionChanged(NotifyCollectionChangedAction.Reset); COMMENTED OUT FOR PERFORMANCE
 
             }
         }
 
-        public void ConfirmSetBall(Ball ball)
+        public void ConfirmSetBalls(/*Ball ball*/)
         {
             //OnCollectionChanged(NotifyCollectionChangedAction.Replace, ball);
             OnCollectionChanged(NotifyCollectionChangedAction.Reset);

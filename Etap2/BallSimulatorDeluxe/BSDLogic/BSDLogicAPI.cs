@@ -45,6 +45,7 @@ namespace BSDLogic
                 ));
             }
             base.balls.Put(ballList);
+            base.balls.ConfirmSetBalls();
         }
 
         public override void UpdateBalls(int chrononMiliseconds, int planckPixels)
@@ -70,9 +71,9 @@ namespace BSDLogic
                         locationSpan.Top + (balls[i].Location.Item2 - locationSpan.Top + locationSpan.Height) % locationSpan.Height
                     );
                 }
-                balls.ConfirmSetBall(balls[i]);
+                //balls.ConfirmSetBall(balls[i]); COMMENTED OUT FOR PERFORMANCE
             }
-           
+            balls.ConfirmSetBalls();
             
         }
         public override void SetConstraint(string constraintName, object constraintValue)
