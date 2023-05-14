@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +12,11 @@ namespace BSDLogic
 {
     class BSDLogicAPI : BSDAbstractLogicAPI
     {
-        public BSDLogicAPI(BSDData.BSDAbstractDataAPI dataAPI) : base(dataAPI) { }
+        protected ICollisionDetector? collisionDetector = null;
+        public BSDLogicAPI(BSDData.BSDAbstractDataAPI dataAPI/*, CollisionDetector? collisionDetector = null*/) : base(dataAPI) {
+            //this.collisionDetector = collisionDetector ?? new CollisionDetector();
+        }
+
 
         public override void GenerateBalls(int ballsNumber, string ballsColor)
         {
@@ -30,49 +35,134 @@ namespace BSDLogic
                 );
 
                 double theta = 2 * Math.PI * random.NextDouble();
+                int r = minimalBallRadius + random.Next(maximalBallRadius - minimalBallRadius);
 
                 ballList.Add(new Ball(
                     location: (
-                        locationSpan.X + random.Next(locationSpan.Width),
-                        locationSpan.Y + random.Next(locationSpan.Height)
+                        locationSpan.X+r + random.Next(locationSpan.Width-2*r),
+                        locationSpan.Y+r + random.Next(locationSpan.Height-2*r)
                     ),
-                    radius: minimalBallRadius+random.Next(maximalBallRadius-minimalBallRadius),
-                    color: ballsColor,
+                    radius: r,
+                    r,
+                    color: ballsColor /*"#"+random.Next().ToString("X")*/,
                     velocity: new Vector2(
                         (float)(velocityMagnitude*Math.Cos(theta)),
                         (float)(velocityMagnitude*Math.Sin(theta))
                     )
                 ));
+                //ballList.Add(b);
+                /*ballList.Add(new Ball(
+                    location: b.Location,
+                    radius: 5,
+                    color: "red",
+                    velocity: b.Velocity
+                ));*/
             }
+            /*ballList.Add(new Ball(
+                location: (locationSpan.Left, locationSpan.Top),
+                radius: 25,
+                color: "green",
+                velocity: new Vector2(0,0)
+            ));
+            ballList.Add(new Ball(
+                location: (locationSpan.Right, locationSpan.Top),
+                radius: 25,
+                color: "green",
+                velocity: new Vector2(0, 0)
+            ));
+            ballList.Add(new Ball(
+                location: (locationSpan.Left, locationSpan.Bottom),
+                radius: 25,
+                color: "green",
+                velocity: new Vector2(0, 0)
+            ));
+            ballList.Add(new Ball(
+                location: (locationSpan.Right, locationSpan.Bottom),
+                radius: 25,
+                color: "green",
+                velocity: new Vector2(0, 0)
+            ));
+
+
+            ballList.Add(new Ball(
+                location: (0, 0),
+                radius: 20,
+                color: "purple",
+                velocity: new Vector2(0, 0)
+            ));
+            ballList.Add(new Ball(
+                location: (locationSpan.Width, 0),
+                radius: 20,
+                color: "purple",
+                velocity: new Vector2(0, 0)
+            ));
+            ballList.Add(new Ball(
+                location: (0, locationSpan.Height),
+                radius: 20,
+                color: "purple",
+                velocity: new Vector2(0, 0)
+            ));
+            ballList.Add(new Ball(
+                location: (locationSpan.Width, locationSpan.Height),
+                radius: 20,
+                color: "purple",
+                velocity: new Vector2(0, 0)
+            ));*/
+
             base.balls.Put(ballList);
             base.balls.ConfirmSetBalls();
+            this.collisionDetector = new CrossCollisionDetector(base.balls);
         }
 
         public override void UpdateBalls(int chrononMiliseconds, int planckPixels)
         {
-
             Rectangle locationSpan = dataAPI.GetConstraintManager().GetLocationSpan();
-            for (int i=0; i<base.balls.Count(); i++)
+            Parallel.For(0, base.balls.Count(), (i) =>
             {
                 double dx = chrononMiliseconds * balls[i].Velocity.X * planckPixels / 1000;
                 double dy = chrononMiliseconds * balls[i].Velocity.Y * planckPixels / 1000;
-                /*balls[i].Location.Offset(
-                    dx,
-                    dy
-                );*/
+                
                 balls[i].Location = (
                         balls[i].Location.Item1 + dx,
                         balls[i].Location.Item2 + dy
                 );
-                if (!locationSpan.Contains(new Point((int)balls[i].Location.Item1, (int)balls[i].Location.Item2)))
+                //if (!locationSpan.Contains(new Point((int)balls[i].Location.Item1, (int)balls[i].Location.Item2)))
+                //{
+                //    /*balls[i].Location = (
+                //        locationSpan.Left + (balls[i].Location.Item1 - locationSpan.Left + locationSpan.Width) % locationSpan.Width,
+                //        locationSpan.Top + (balls[i].Location.Item2 - locationSpan.Top + locationSpan.Height) % locationSpan.Height
+                //    );*/
+                //    CollisionPhysics.WallPair wallPair;
+                //    if (balls[i].Location.Item1-balls[i].Radius < locationSpan.Left || balls[i].Location.Item1 + balls[i].Radius > locationSpan.Right){
+                //        wallPair = CollisionPhysics.WallPair.LeftRight;
+                //        balls[i].Velocity = CollisionPhysics.WallCollision(balls[i].Velocity, CollisionPhysics.WallPair.LeftRight);
+                //    }
+                //    else if(balls[i].Location.Item2 - balls[i].Radius < locationSpan.Top || balls[i].Location.Item2 + balls[i].Radius > locationSpan.Bottom)
+                //    {
+                //        wallPair = CollisionPhysics.WallPair.TopBottom;
+                //    }
+
+                //    balls[i].Velocity = CollisionPhysics.WallCollision(balls[i].Velocity, wallPair);
+                //}
+
+                if (balls[i].Location.Item1 - balls[i].Radius < locationSpan.Left || balls[i].Location.Item1 + balls[i].Radius > locationSpan.Right)
                 {
-                    balls[i].Location = (
-                        locationSpan.Left + (balls[i].Location.Item1 - locationSpan.Left + locationSpan.Width) % locationSpan.Width,
-                        locationSpan.Top + (balls[i].Location.Item2 - locationSpan.Top + locationSpan.Height) % locationSpan.Height
-                    );
+                    balls[i].Velocity = ElasticCollisionPhysics.WallCollision(balls[i].Velocity, ElasticCollisionPhysics.WallPair.LeftRight);
                 }
+                if (balls[i].Location.Item2 - balls[i].Radius < locationSpan.Top || balls[i].Location.Item2 + balls[i].Radius > locationSpan.Bottom)
+                {
+                    balls[i].Velocity = ElasticCollisionPhysics.WallCollision(balls[i].Velocity, ElasticCollisionPhysics.WallPair.TopBottom);
+                }
+
                 //balls.ConfirmSetBall(balls[i]); COMMENTED OUT FOR PERFORMANCE
-            }
+            });
+            /*for (int i = 0; i < base.balls.Count(); i++)
+            {
+
+            }*/
+
+            this.collisionDetector?.DetectAndResolve();
+
             balls.ConfirmSetBalls();
             
         }

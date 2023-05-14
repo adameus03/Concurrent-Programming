@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 //using System.Windows.Shapes;
 
@@ -16,7 +17,7 @@ namespace BSDMVVM
         private readonly BSDLogic.BSDAbstractLogicAPI logicAPI;
         private int simulationNumberOfBalls = 20;
         
-        private int simulationFPS = 60;
+        private int simulationFPS = 100;
         private int simulationJumpingFactor = 2;
         private string colorForEachBall = "Blue";
         private BSDLogic.BallCollection balls;
@@ -42,7 +43,9 @@ namespace BSDMVVM
 
         public void EllipsesRepositioning()
         {
+
             this.logicAPI.UpdateBalls(1000 / this.simulationFPS, this.simulationJumpingFactor);
+
         }
 
         public void SetBoundingRectangle(Rectangle rectangle)

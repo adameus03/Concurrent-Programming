@@ -31,6 +31,9 @@ namespace BSDMVVM
         private const string generatorPath = "Images/generate.png";
         private const string generatorActivePath = "Images/generate_active.png";
 
+        private int worldWidth = 800;
+        private int worldHeight = 450;
+
         private bool animationPaused = true;
         private bool ballsNumberTextBoxEnabled = true;
 
@@ -44,7 +47,7 @@ namespace BSDMVVM
                 //MessageBox.Show("Balls.CollectionChanged event detected in ViewModel");
                 OnPropertyChanged(nameof(this.Balls));
             };
-            this.model.SetBoundingRectangle(new System.Drawing.Rectangle(0, 0, this.WindowWidth, this.WindowHeight-30));
+            this.model.SetBoundingRectangle(new System.Drawing.Rectangle(0, 0, worldWidth, worldHeight));
             //this.model.SetBoundingRectangle(new System.Drawing.Rectangle(0, 0, 200, 200));
 
             this.model.SetMinimalBallRadius(10);
@@ -197,8 +200,28 @@ namespace BSDMVVM
 
         public bool BallsNumberTextBoxEnabled => this.ballsNumberTextBoxEnabled;
 
-        public int WindowWidth { get; set; } = 800;
-        public int WindowHeight { get; set; } = 450;
+        public int WorldWidth {
+            get
+            {
+                return this.worldWidth;
+            }
+            set
+            {
+                this.worldWidth = value;
+                this.model.SetBoundingRectangle(new System.Drawing.Rectangle(0, 0, this.worldWidth, this.worldHeight));
+            }
+        }
+        public int WorldHeight { 
+            get
+            {
+                return this.worldHeight;
+            }
+            set
+            {
+                this.worldHeight = value;
+                this.model.SetBoundingRectangle(new System.Drawing.Rectangle(0, 0, this.worldWidth, this.worldHeight));
+            }
+        }
 
     }
 }
