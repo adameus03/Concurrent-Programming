@@ -15,9 +15,9 @@ namespace TestBallSimulatorDeluxe
         [SetUp]
         public void Setup()
         {
-            Ball ball1 = new Ball((0.5, 0.2), 3, "Gray", new System.Numerics.Vector2(2, -3));
+            Ball ball1 = new Ball((0.5, 0.2), 3, 1, "Gray", new System.Numerics.Vector2(2, -3));
             list.Add(ball1);
-            Ball ball2 = new Ball((-0.2, -3), 2, "Yellow", new System.Numerics.Vector2(3, -8));
+            Ball ball2 = new Ball((-0.2, -3), 2, 1,"Yellow", new System.Numerics.Vector2(3, -8));
             list.Add(ball2);
         }
 
