@@ -15,9 +15,31 @@ namespace BSDLogic
             double dy = b1.Location.Item2 - b2.Location.Item2;
             return dx * dx + dy * dy;
         }
-        public override void DetectAndResolve()
+        public override async void DetectAndResolve()
         {
-            for(int i=0; i<base.ballCollection.Count()-1; i++)
+            await Task.Run(() =>
+            {
+                Parallel.For(0, base.ballCollection.Count() - 1, (i) =>
+                {
+                    Monitor.Enter(ballCollection[i]);
+                    Ball b1 = base.ballCollection[i];
+                    for (int j = i + 1; j < base.ballCollection.Count(); j++)
+                    {
+                        Monitor.Enter(ballCollection[j]);
+                        Ball b2 = base.ballCollection[j];
+                        double radiiSum = b1.Radius + b2.Radius;
+                        if (CenterSquaredDistance(b1, b2) < radiiSum * radiiSum)
+                        {
+                            ElasticCollisionPhysics.BallCollision(ref b1, ref b2);
+                            //b1.Color = "red";
+                        }
+                        Monitor.Exit(ballCollection[j]);
+                    }
+                    Monitor.Exit(ballCollection[i]);
+                    
+                });
+            });
+            /*for(int i=0; i<base.ballCollection.Count()-1; i++)
             {
                 for(int j=i+1; j<base.ballCollection.Count(); j++)
                 {
@@ -30,7 +52,7 @@ namespace BSDLogic
                         //b1.Color = "red";
                     }
                 }
-            }
+            }*/
         }
     }
 }
