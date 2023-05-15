@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -42,8 +43,9 @@ namespace BSDLogic
             (v1y, v2y) = VelocitiesAfterCollision(b1.Velocity.Y, b2.Velocity.Y, b1.Mass, b2.Mass);
             b1.Velocity = new Vector2(v1x, v1y);
             b2.Velocity = new Vector2(v2x, v2y);
-            b1.Color = "green";
-            b2.Color = "green";
+            b1.Color = b1.Color == "green" ? "blue" : "green";
+            b2.Color = b2.Color == "blue" ? "green" : "blue";
+
             //b1.Velocity = new Vector2(0, 0);
             //b2.Velocity = new Vector2(0, 0);
         }

@@ -114,54 +114,61 @@ namespace BSDLogic
             this.collisionDetector = new CrossCollisionDetector(base.balls);
         }
 
-        public override void UpdateBalls(int chrononMiliseconds, int planckPixels)
+        public override async void UpdateBalls(int chrononMiliseconds, int planckPixels)
         {
-            Rectangle locationSpan = dataAPI.GetConstraintManager().GetLocationSpan();
-            Parallel.For(0, base.balls.Count(), (i) =>
+            await Task.Run(() =>
             {
-                double dx = chrononMiliseconds * balls[i].Velocity.X * planckPixels / 1000;
-                double dy = chrononMiliseconds * balls[i].Velocity.Y * planckPixels / 1000;
-                
-                balls[i].Location = (
-                        balls[i].Location.Item1 + dx,
-                        balls[i].Location.Item2 + dy
-                );
-                //if (!locationSpan.Contains(new Point((int)balls[i].Location.Item1, (int)balls[i].Location.Item2)))
-                //{
-                //    /*balls[i].Location = (
-                //        locationSpan.Left + (balls[i].Location.Item1 - locationSpan.Left + locationSpan.Width) % locationSpan.Width,
-                //        locationSpan.Top + (balls[i].Location.Item2 - locationSpan.Top + locationSpan.Height) % locationSpan.Height
-                //    );*/
-                //    CollisionPhysics.WallPair wallPair;
-                //    if (balls[i].Location.Item1-balls[i].Radius < locationSpan.Left || balls[i].Location.Item1 + balls[i].Radius > locationSpan.Right){
-                //        wallPair = CollisionPhysics.WallPair.LeftRight;
-                //        balls[i].Velocity = CollisionPhysics.WallCollision(balls[i].Velocity, CollisionPhysics.WallPair.LeftRight);
-                //    }
-                //    else if(balls[i].Location.Item2 - balls[i].Radius < locationSpan.Top || balls[i].Location.Item2 + balls[i].Radius > locationSpan.Bottom)
-                //    {
-                //        wallPair = CollisionPhysics.WallPair.TopBottom;
-                //    }
-
-                //    balls[i].Velocity = CollisionPhysics.WallCollision(balls[i].Velocity, wallPair);
-                //}
-
-                if (balls[i].Location.Item1 - balls[i].Radius < locationSpan.Left || balls[i].Location.Item1 + balls[i].Radius > locationSpan.Right)
+                Rectangle locationSpan = dataAPI.GetConstraintManager().GetLocationSpan();
+                Parallel.For(0, base.balls.Count(), (i) =>
                 {
-                    balls[i].Velocity = ElasticCollisionPhysics.WallCollision(balls[i].Velocity, ElasticCollisionPhysics.WallPair.LeftRight);
-                }
-                if (balls[i].Location.Item2 - balls[i].Radius < locationSpan.Top || balls[i].Location.Item2 + balls[i].Radius > locationSpan.Bottom)
-                {
-                    balls[i].Velocity = ElasticCollisionPhysics.WallCollision(balls[i].Velocity, ElasticCollisionPhysics.WallPair.TopBottom);
-                }
+                    Monitor.Enter(balls[i]);
+                    double dx = chrononMiliseconds * balls[i].Velocity.X * planckPixels / 1000;
+                    double dy = chrononMiliseconds * balls[i].Velocity.Y * planckPixels / 1000;
 
-                //balls.ConfirmSetBall(balls[i]); COMMENTED OUT FOR PERFORMANCE
+                    balls[i].Location = (
+                            balls[i].Location.Item1 + dx,
+                            balls[i].Location.Item2 + dy
+                    );
+                    //if (!locationSpan.Contains(new Point((int)balls[i].Location.Item1, (int)balls[i].Location.Item2)))
+                    //{
+                    //    /*balls[i].Location = (
+                    //        locationSpan.Left + (balls[i].Location.Item1 - locationSpan.Left + locationSpan.Width) % locationSpan.Width,
+                    //        locationSpan.Top + (balls[i].Location.Item2 - locationSpan.Top + locationSpan.Height) % locationSpan.Height
+                    //    );*/
+                    //    CollisionPhysics.WallPair wallPair;
+                    //    if (balls[i].Location.Item1-balls[i].Radius < locationSpan.Left || balls[i].Location.Item1 + balls[i].Radius > locationSpan.Right){
+                    //        wallPair = CollisionPhysics.WallPair.LeftRight;
+                    //        balls[i].Velocity = CollisionPhysics.WallCollision(balls[i].Velocity, CollisionPhysics.WallPair.LeftRight);
+                    //    }
+                    //    else if(balls[i].Location.Item2 - balls[i].Radius < locationSpan.Top || balls[i].Location.Item2 + balls[i].Radius > locationSpan.Bottom)
+                    //    {
+                    //        wallPair = CollisionPhysics.WallPair.TopBottom;
+                    //    }
+
+                    //    balls[i].Velocity = CollisionPhysics.WallCollision(balls[i].Velocity, wallPair);
+                    //}
+
+                    if (balls[i].Location.Item1 - balls[i].Radius < locationSpan.Left || balls[i].Location.Item1 + balls[i].Radius > locationSpan.Right)
+                    {
+                        balls[i].Velocity = ElasticCollisionPhysics.WallCollision(balls[i].Velocity, ElasticCollisionPhysics.WallPair.LeftRight);
+                    }
+                    if (balls[i].Location.Item2 - balls[i].Radius < locationSpan.Top || balls[i].Location.Item2 + balls[i].Radius > locationSpan.Bottom)
+                    {
+                        balls[i].Velocity = ElasticCollisionPhysics.WallCollision(balls[i].Velocity, ElasticCollisionPhysics.WallPair.TopBottom);
+                    }
+
+                    //balls.ConfirmSetBall(balls[i]); MOVED OUT OF THE LOOP FOR PERFORMANCE
+
+                    Monitor.Exit(balls[i]);
+                });
+                /*for (int i = 0; i < base.balls.Count(); i++) //SEQUENTIAL LOOP WAS REPLACED WITH PARALLELIZED VERSION
+                {
+
+                }*/
+
+                this.collisionDetector?.DetectAndResolve();
             });
-            /*for (int i = 0; i < base.balls.Count(); i++)
-            {
-
-            }*/
-
-            this.collisionDetector?.DetectAndResolve();
+            
 
             balls.ConfirmSetBalls();
             

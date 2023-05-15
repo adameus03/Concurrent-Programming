@@ -6,27 +6,23 @@ using System.Threading.Tasks;
 
 namespace BSDLogic
 {
-    internal class CrossCollisionDetector : ICollisionDetector
+    internal class CrossCollisionDetector : CollisionDetector, ICollisionDetector
     {
-        private BallCollection ballCollection;
-        public CrossCollisionDetector(BallCollection ballCollection)
-        {
-            this.ballCollection = ballCollection;
-        }
+        public CrossCollisionDetector(BallCollection ballCollection) : base(ballCollection) { }
         private double CenterSquaredDistance(Ball b1, Ball b2)
         {
             double dx = b1.Location.Item1 - b2.Location.Item1;
             double dy = b1.Location.Item2 - b2.Location.Item2;
             return dx * dx + dy * dy;
         }
-        public void DetectAndResolve()
+        public override void DetectAndResolve()
         {
-            for(int i=0; i<this.ballCollection.Count()-1; i++)
+            for(int i=0; i<base.ballCollection.Count()-1; i++)
             {
-                for(int j=i+1; j<this.ballCollection.Count(); j++)
+                for(int j=i+1; j<base.ballCollection.Count(); j++)
                 {
-                    Ball b1 = this.ballCollection[i];
-                    Ball b2 = this.ballCollection[j];
+                    Ball b1 = base.ballCollection[i];
+                    Ball b2 = base.ballCollection[j];
                     double radiiSum = b1.Radius + b2.Radius;
                     if (CenterSquaredDistance(b1, b2) < radiiSum * radiiSum)
                     {
