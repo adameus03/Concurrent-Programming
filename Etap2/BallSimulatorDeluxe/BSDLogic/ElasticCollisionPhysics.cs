@@ -9,7 +9,7 @@ using System.Transactions;
 
 namespace BSDLogic
 {
-    internal static class ElasticCollisionPhysics
+    public static class ElasticCollisionPhysics
     {
         public enum WallPair
         {
@@ -28,7 +28,7 @@ namespace BSDLogic
             }
         }
 
-        private static (float, float) VelocitiesAfterCollision(float v1, float v2, float m1, float m2)
+        public static (float, float) VelocitiesAfterCollision(float v1, float v2, float m1, float m2)
         {
             return (
                 ((m1-m2)*v1+2*m2*v2)/(m1+m2),

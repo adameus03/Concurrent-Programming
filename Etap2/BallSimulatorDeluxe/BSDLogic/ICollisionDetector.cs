@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BSDLogic
 {
-    internal interface ICollisionDetector
+    public interface ICollisionDetector
     {
         public void DetectAndResolve();
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BSDLogic
 {
-    internal abstract class CollisionDetector : ICollisionDetector
+    public abstract class CollisionDetector : ICollisionDetector
     {
         protected BallCollection ballCollection;
         public CollisionDetector(BallCollection ballCollection)
