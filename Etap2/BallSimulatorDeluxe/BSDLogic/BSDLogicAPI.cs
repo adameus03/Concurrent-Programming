@@ -116,7 +116,7 @@ namespace BSDLogic
 
         public override async void UpdateBalls(int chrononMiliseconds, int planckPixels)
         {
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 Rectangle locationSpan = dataAPI.GetConstraintManager().GetLocationSpan();
                 Parallel.For(0, base.balls.Count(), (i) =>
@@ -166,7 +166,10 @@ namespace BSDLogic
 
                 }*/
 
-                this.collisionDetector?.DetectAndResolve();
+                if (this.collisionDetector != null)
+                {
+                    await this.collisionDetector.DetectAndResolve();
+                }
             });
             
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,8 +16,9 @@ namespace BSDLogic
             double dy = b1.Location.Item2 - b2.Location.Item2;
             return dx * dx + dy * dy;
         }
-        public override async void DetectAndResolve()
+        public override async Task DetectAndResolve()
         {
+            //Debug.WriteLine("OK");
             await Task.Run(() =>
             {
                 Parallel.For(0, base.ballCollection.Count() - 1, (i) =>

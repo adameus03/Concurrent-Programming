@@ -8,7 +8,7 @@ namespace BSDLogic
 {
     public interface ICollisionDetector
     {
-        public void DetectAndResolve();
+        public Task DetectAndResolve();
 
     }
 }

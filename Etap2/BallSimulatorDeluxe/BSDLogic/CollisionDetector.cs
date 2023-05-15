@@ -20,6 +20,6 @@ namespace BSDLogic
             return new CrossCollisionDetector(ballCollection);
         }
 
-        public abstract void DetectAndResolve();
+        public abstract Task DetectAndResolve();
     }
 }

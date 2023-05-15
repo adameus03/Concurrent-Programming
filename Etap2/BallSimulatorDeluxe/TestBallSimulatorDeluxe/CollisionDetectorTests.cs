@@ -35,7 +35,7 @@ namespace TestBallSimulatorDeluxe
         [Test]
         public void Test2()
         {
-            collisionDetector.DetectAndResolve();
+            collisionDetector.DetectAndResolve().Wait();
             Assert.That(b1.Velocity.X, Is.EqualTo(2));
             Assert.That(b1.Velocity.Y, Is.EqualTo(0));
             Assert.That(b2.Velocity.X, Is.EqualTo(0));
