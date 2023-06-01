@@ -12,6 +12,15 @@ namespace BSDLogic
 
         public LoggableCrossCollisionDetector(BallCollection ballCollection) : base(ballCollection)
         {
+            Initialize();
+        }
+        public LoggableCrossCollisionDetector(BallCollection ballCollection, BSDAbstractLogicAPI logicAPI) : base(ballCollection, logicAPI)
+        {
+            Initialize();
+        }
+
+        private void Initialize()
+        {
             base.CollisionDetected += LoggableCrossCollisionDetector_CollisionDetected;
         }
 
@@ -26,7 +35,12 @@ namespace BSDLogic
 
         public void Log()
         {
-            base.logicAPI?.DataAPI.UploadDataCouple(this.ballCouple.Item1, this.ballCouple.Item2, "COLLISION");
+            if (base.logicAPI == null) return;
+            if (base.logicAPI.DataAPI.GetSerializationLogManager().IsActive)
+            {
+                base.logicAPI?.DataAPI.UploadDataCouple(this.ballCouple.Item1, this.ballCouple.Item2, "COLLISION");
+            }
+            
         }
     }
 }

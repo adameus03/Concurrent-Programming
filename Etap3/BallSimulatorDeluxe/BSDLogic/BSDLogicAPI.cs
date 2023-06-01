@@ -111,7 +111,8 @@ namespace BSDLogic
 
             base.balls.Put(ballList);
             base.balls.ConfirmSetBalls();
-            this.collisionDetector = new CrossCollisionDetector(base.balls);
+            //this.collisionDetector = new CrossCollisionDetector(base.balls, );
+            this.collisionDetector = CollisionDetector.CreateInstance(base.balls, this);
         }
 
         public override async void UpdateBalls(int chrononMiliseconds, int planckPixels)

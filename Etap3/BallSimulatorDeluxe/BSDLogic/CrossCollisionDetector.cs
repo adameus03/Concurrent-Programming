@@ -10,6 +10,7 @@ namespace BSDLogic
     internal class CrossCollisionDetector : CollisionDetector, ICollisionDetector
     {
         public CrossCollisionDetector(BallCollection ballCollection) : base(ballCollection) { }
+        public CrossCollisionDetector(BallCollection ballCollection, BSDAbstractLogicAPI logicAPI) : base(ballCollection, logicAPI) { }
         private double CenterSquaredDistance(Ball b1, Ball b2)
         {
             double dx = b1.Location.Item1 - b2.Location.Item1;
