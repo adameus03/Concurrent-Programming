@@ -14,8 +14,11 @@ using System.Text.RegularExpressions;
 
 namespace BSDMVVM
 {
-    class BSDViewModel : INotifyPropertyChanged
+    [VVM(typeof(BSDViewModel))]
+    class BSDViewModel : /*INotifyPropertyChanged*/ BaseViewModel
     {
+        private bool realTimeLoggingEnabled = false;
+
         private readonly BSDModel model;
         private Command runControlHighlight = new Command();
         private Command runControlUnhighlight = new Command();
@@ -164,13 +167,13 @@ namespace BSDMVVM
             OnPropertyChanged(nameof(this.RunControlImagePath));
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        /*public event PropertyChangedEventHandler? PropertyChanged;
 
 
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        }*/
 
 
         public double CanvasWidth { get; set; }
@@ -200,6 +203,18 @@ namespace BSDMVVM
 
         public bool BallsNumberTextBoxEnabled => this.ballsNumberTextBoxEnabled;
 
+        public bool RealTimeLoggingEnabled
+        {
+            get
+            {
+                return this.realTimeLoggingEnabled;
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public int WorldWidth {
             get
             {
@@ -222,6 +237,8 @@ namespace BSDMVVM
                 this.model.SetBoundingRectangle(new System.Drawing.Rectangle(0, 0, this.worldWidth, this.worldHeight));
             }
         }
+
+
 
     }
 }

@@ -1,0 +1,35 @@
+﻿/*using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BSDMVVM
+{
+    internal interface IWindowService
+    {
+    }
+}*/
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BSDMVVM
+{
+    interface IWindowService
+    {
+        public void ShowWindow<TViewModel>(TViewModel viewModel);
+        public void CloseWindow<TViewModel>(TViewModel viewModel);
+
+        public void CloseMainWindow();
+
+        public string? ShowFileDialog();
+
+        public void ShowMessage(string message);
+
+    }
+}
+

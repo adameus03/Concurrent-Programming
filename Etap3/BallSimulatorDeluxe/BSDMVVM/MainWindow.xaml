@@ -52,7 +52,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Center">
-                <CheckBox Content="Enable RT-logging session" VerticalAlignment="Center"/>
+                <CheckBox Content="Enable RT-logging session" VerticalAlignment="Center" IsChecked="{Binding Path=RealTimeLoggingEnabled, Mode=TwoWay}"/>
                 
             </StackPanel>
 
