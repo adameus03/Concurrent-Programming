@@ -5,11 +5,28 @@ namespace BSDData
     class BSDDataAPI : BSDAbstractDataAPI
     {
         BasicConstraintManager basicConstraintManager = new BasicConstraintManager();
-        public BSDDataAPI() : base() { }
+        SerializationLogManager serializationLogManager;
+        public BSDDataAPI() : base() {
+            this.serializationLogManager = SerializationLogManager.CreateInstance();
+        }
 
         public override BasicConstraintManager GetConstraintManager()
         {
-            return basicConstraintManager;
+            return this.basicConstraintManager;
+        }
+
+        public override SerializationLogManager GetSerializationLogManager()
+        {
+            return this.serializationLogManager;
+        }
+
+        public override void UploadDataCouple(object dataCoupleElement1, object dataCoupleElement2, string? name)
+        {
+            if (this.serializationLogManager.IsLogging)
+            {
+                serializationLogManager.SerializeAndStore((dataCoupleElement1, dataCoupleElement2), name);
+            }
+            else throw new SerializationLogManager.NotLoggingException(serializationLogManager.FilePath);
         }
     }
 }

@@ -16,5 +16,23 @@ namespace BSDData
         }
 
         public abstract IConstraintManager GetConstraintManager();
+        public abstract ISerializationLogManager GetSerializationLogManager();
+
+        public abstract void UploadDataCouple(object dataCoupleElement1, object dataCoupleElement2, string? name);
+
+        public void SetLoggingPath(string path)
+        {
+            this.GetSerializationLogManager().SetDestination(path);
+        }
+        public void StartLogging()
+        {
+            this.GetSerializationLogManager().BeginLogging();
+        }
+        public void PauseLogging()
+        {
+            this.GetSerializationLogManager().StopLogging();
+        }
+
+
     }
 }
