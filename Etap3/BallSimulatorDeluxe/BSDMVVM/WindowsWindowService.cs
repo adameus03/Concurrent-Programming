@@ -25,7 +25,7 @@ namespace BSDMVVM
 {
     class WindowsWindowService : IWindowService
     {
-        private static Type GetViewType<TViewModel>()
+        private static Type GetViewType<TViewModel>() where TViewModel : BaseViewModel
         {
 
             return Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(
@@ -37,7 +37,22 @@ namespace BSDMVVM
 
         }
 
-        public void ShowWindow<TViewModel>(TViewModel viewModel)
+        private string? ShowFileDialog<TFileDialog>() where TFileDialog : FileDialog, new()
+        {
+            TFileDialog fileDialog = new TFileDialog();
+            //OpenFileDialog openFileDialog = new OpenFileDialog();
+            bool? showDialogOutput = fileDialog.ShowDialog();
+            if (showDialogOutput != null)
+            {
+                if ((bool)showDialogOutput)
+                {
+                    return fileDialog.FileName;
+                }
+            }
+            return null;
+        }
+
+        public void ShowWindow<TViewModel>(TViewModel viewModel) where TViewModel : BaseViewModel
         {
             Type viewType = WindowsWindowService.GetViewType<TViewModel>();
             Window window = Activator.CreateInstance(viewType) as Window ?? new Window();
@@ -45,7 +60,7 @@ namespace BSDMVVM
             window.Show();
         }
 
-        public void CloseWindow<TViewModel>(TViewModel viewModel)
+        public void CloseWindow<TViewModel>(TViewModel viewModel) where TViewModel : BaseViewModel
         {
             Window? window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w => w.DataContext.Equals(viewModel)));
             window?.Close();
@@ -56,9 +71,9 @@ namespace BSDMVVM
             Application.Current.MainWindow.Close();
         }
 
-        public string? ShowFileDialog()
+        public string? ShowOpenFileDialog()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            /*OpenFileDialog openFileDialog = new OpenFileDialog();
             bool? showDialogOutput = openFileDialog.ShowDialog();
             if (showDialogOutput != null)
             {
@@ -67,7 +82,13 @@ namespace BSDMVVM
                     return openFileDialog.FileName;
                 }
             }
-            return null;
+            return null;*/
+            return this.ShowFileDialog<OpenFileDialog>();
+        }
+
+        public string? ShowSaveFileDialog()
+        {
+            return this.ShowFileDialog<SaveFileDialog>();
         }
 
         public void ShowMessage(string message)

@@ -211,7 +211,22 @@ namespace BSDMVVM
             }
             set
             {
-                throw new NotImplementedException();
+                //throw new NotImplementedException();
+                if (value)
+                {
+                    this.model.LogFilePath = BSDViewModel.WindowService.ShowSaveFileDialog();
+                    if (this.model.LogFilePath != null)
+                    {
+                        this.realTimeLoggingEnabled = true;
+                        BSDViewModel.WindowService.ShowMessage($"Logfile path set to {this.model.LogFilePath}");
+                    }
+                }
+                else
+                {
+                    this.model.LogFilePath = null;
+                    this.realTimeLoggingEnabled = false;
+                }
+                
             }
         }
 

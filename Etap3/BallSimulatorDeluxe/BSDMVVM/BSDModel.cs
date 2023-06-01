@@ -22,6 +22,8 @@ namespace BSDMVVM
         private string colorForEachBall = "Blue";
         private BSDLogic.BallCollection balls;
 
+        private string? logFilePath = null;
+
         public BSDModel(BSDLogic.BSDAbstractLogicAPI? logicAPI = null)
         {
             this.logicAPI = logicAPI ?? BSDLogic.BSDAbstractLogicAPI.CreateInstance();
@@ -82,5 +84,11 @@ namespace BSDMVVM
         public int SimulationJumpingFactor { get => this.simulationJumpingFactor; set => this.simulationJumpingFactor = value; }
 
         public BSDLogic.BallCollection Balls => this.balls;
+
+        public string? LogFilePath
+        {
+            get => this.logFilePath;
+            set => this.logFilePath = value;
+        }
     }
 }
