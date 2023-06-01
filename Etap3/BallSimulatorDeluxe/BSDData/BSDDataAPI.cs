@@ -20,11 +20,11 @@ namespace BSDData
             return this.serializationLogManager;
         }
 
-        public override void UploadDataCouple(object dataCoupleElement1, object dataCoupleElement2, string? name)
+        public override async void UploadDataCouple<T>(T dataCoupleElement1, T dataCoupleElement2, string? name)
         {
             if (this.serializationLogManager.IsLogging)
             {
-                serializationLogManager.SerializeAndStore((dataCoupleElement1, dataCoupleElement2), name);
+                await Task.Run(()=>serializationLogManager.SerializeAndStore((dataCoupleElement1, dataCoupleElement2), name));
             }
             else throw new SerializationLogManager.NotLoggingException(serializationLogManager.FilePath);
         }

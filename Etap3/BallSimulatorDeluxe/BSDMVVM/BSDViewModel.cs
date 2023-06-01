@@ -219,10 +219,15 @@ namespace BSDMVVM
                     {
                         this.realTimeLoggingEnabled = true;
                         BSDViewModel.WindowService.ShowMessage($"Logfile path set to {this.model.LogFilePath}");
+
+                        //model call (IoC)
+                        this.model.LoggingOn();
                     }
                 }
                 else
                 {
+                    //model call (IoC)
+                    this.model.LoggingOff();
 
                     BSDViewModel.WindowService.ShowMessage($"Finished logging to {this.model.LogFilePath}");
                     this.model.LogFilePath = null;

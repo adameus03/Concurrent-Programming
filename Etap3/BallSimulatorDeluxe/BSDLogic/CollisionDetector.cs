@@ -21,7 +21,7 @@ namespace BSDLogic
             this.ballCollection = ballCollection;
         }
 
-        public static CollisionDetector CreateInstance(BallCollection ballCollection, BSDAbstractLogicAPI? logicAPI)
+        public static CollisionDetector CreateInstance(BallCollection ballCollection, BSDAbstractLogicAPI? logicAPI = null)
         {
             //return new CrossCollisionDetector(ballCollection);
             /* REFACTORING TO LOGGABLE CROSS COLLISION DETECTOR 

@@ -10,7 +10,7 @@ namespace BSDData
     {
         public void BeginLogging();
         public void StopLogging();
-        public abstract void SerializeAndStore(object @object, string? name = null);
+        public abstract void SerializeAndStore<T>(T @object, string? name = null);
         public void SetDestination(string destination);
         public bool IsActive { get; }
 

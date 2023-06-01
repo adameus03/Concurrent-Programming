@@ -25,7 +25,8 @@ namespace BSDLogic
             //Debug.WriteLine("OK");
             await Task.Run(() =>
             {
-                Parallel.For(0, base.ballCollection.Count() - 1, (i) =>
+                //Parallel.For(0, base.ballCollection.Count() - 1, (i) =>
+                for(int i=0; i<base.ballCollection.Count()-1; i++)
                 {
                     Monitor.Enter(ballCollection[i]);
                     Ball b1 = base.ballCollection[i];
@@ -44,7 +45,7 @@ namespace BSDLogic
                     }
                     Monitor.Exit(ballCollection[i]);
                     
-                });
+                }//);
             });
             /*for(int i=0; i<base.ballCollection.Count()-1; i++)
             {

@@ -120,7 +120,9 @@ namespace BSDLogic
             await Task.Run(async () =>
             {
                 Rectangle locationSpan = dataAPI.GetConstraintManager().GetLocationSpan();
-                Parallel.For(0, base.balls.Count(), (i) =>
+                
+                //Parallel.For(0, base.balls.Count(), (i) =>
+                for(int i=0; i<base.balls.Count(); i++)
                 {
                     Monitor.Enter(balls[i]);
                     double dx = chrononMiliseconds * balls[i].Velocity.X * planckPixels / 1000;
@@ -161,7 +163,7 @@ namespace BSDLogic
                     //balls.ConfirmSetBall(balls[i]); MOVED OUT OF THE LOOP FOR PERFORMANCE
 
                     Monitor.Exit(balls[i]);
-                });
+                }//);
                 /*for (int i = 0; i < base.balls.Count(); i++) //SEQUENTIAL LOOP WAS REPLACED WITH PARALLELIZED VERSION
                 {
 

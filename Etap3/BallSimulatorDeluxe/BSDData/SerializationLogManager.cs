@@ -46,7 +46,7 @@ namespace BSDData
             this.isLogging = false;
         }
 
-        public abstract void SerializeAndStore(object @object, string? name = null);
+        public abstract void SerializeAndStore<TObject>(TObject @object, string? name = null);
 
         protected StreamWriter? FileStreamWriter => this.fileStreamWriter;
 

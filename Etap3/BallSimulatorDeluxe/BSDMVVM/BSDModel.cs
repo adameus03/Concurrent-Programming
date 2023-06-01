@@ -67,6 +67,20 @@ namespace BSDMVVM
             this.logicAPI.SetConstraint("BallVelocityMagnitude", speed);
         }
 
+        public void LoggingOn()
+        {
+            if(this.logFilePath == null)
+            {
+                throw new NullReferenceException();
+            }
+            this.logicAPI.EnableLogging(this.logFilePath);
+        }
+
+        public void LoggingOff()
+        {
+            this.logicAPI.DisableLogging();
+        }
+
         public int NumberOfBalls { get => this.simulationNumberOfBalls; set => this.simulationNumberOfBalls = value; }
         public string ColorForEachBall { get => this.colorForEachBall; set => this.colorForEachBall = value; }
 

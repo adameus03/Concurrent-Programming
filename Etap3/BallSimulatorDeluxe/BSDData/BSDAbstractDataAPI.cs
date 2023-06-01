@@ -18,7 +18,7 @@ namespace BSDData
         public abstract IConstraintManager GetConstraintManager();
         public abstract ISerializationLogManager GetSerializationLogManager();
 
-        public abstract void UploadDataCouple(object dataCoupleElement1, object dataCoupleElement2, string? name);
+        public abstract void UploadDataCouple<TObject>(TObject dataCoupleElement1, TObject dataCoupleElement2, string? name);
 
         public void SetLoggingPath(string path)
         {
