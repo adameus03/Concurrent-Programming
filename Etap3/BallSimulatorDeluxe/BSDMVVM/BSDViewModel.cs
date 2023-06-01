@@ -223,8 +223,11 @@ namespace BSDMVVM
                 }
                 else
                 {
+
+                    BSDViewModel.WindowService.ShowMessage($"Finished logging to {this.model.LogFilePath}");
                     this.model.LogFilePath = null;
                     this.realTimeLoggingEnabled = false;
+                    
                 }
                 
             }

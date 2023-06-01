@@ -16,6 +16,9 @@ namespace BSDLogic
             double dy = b1.Location.Item2 - b2.Location.Item2;
             return dx * dx + dy * dy;
         }
+        
+
+
         public override async Task DetectAndResolve()
         {
             //Debug.WriteLine("OK");
@@ -32,6 +35,7 @@ namespace BSDLogic
                         double radiiSum = b1.Radius + b2.Radius;
                         if (CenterSquaredDistance(b1, b2) < radiiSum * radiiSum)
                         {
+                            base.OnCollisionDetected(this, new CollisionDetectedEventArgs(b1, b2));
                             ElasticCollisionPhysics.BallCollision(ref b1, ref b2);
                             //b1.Color = "red";
                         }
@@ -56,5 +60,7 @@ namespace BSDLogic
                 }
             }*/
         }
+
+
     }
 }

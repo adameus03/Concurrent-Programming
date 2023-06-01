@@ -72,6 +72,7 @@ namespace BSDData
         }
 
         public bool IsLogging => this.isLogging;
+        public bool IsActive => this.isLogging;
 
         public class NotLoggingException : Exception
         {
