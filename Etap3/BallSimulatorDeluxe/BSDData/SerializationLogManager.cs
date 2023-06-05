@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BSDData
 {
-    internal abstract class SerializationLogManager : ISerializationLogManager
+    public abstract class SerializationLogManager : ISerializationLogManager
     {
         
         private string? filePath = null;

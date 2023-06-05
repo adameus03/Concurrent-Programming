@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace BSDData
 {
-    internal class JSONSerializationLogManager : SerializationLogManager
+    public class JSONSerializationLogManager : SerializationLogManager
     {
         public JSONSerializationLogManager(string? filePath = null) : base(filePath) { }
 
